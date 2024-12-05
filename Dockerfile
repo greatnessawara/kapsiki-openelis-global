@@ -16,6 +16,7 @@ ARG DEFAULT_PW="adminADMIN!"
 COPY ./install/createDefaultPassword.sh /build/install/createDefaultPassword.sh
 WORKDIR /build
 RUN ./install/createDefaultPassword.sh -c -p ${DEFAULT_PW}
+RUN git submodule update --init --recursive
 
 ##
 # Build DataExport
