@@ -16,12 +16,13 @@ ARG DEFAULT_PW="adminADMIN!"
 COPY ./install/createDefaultPassword.sh /build/install/createDefaultPassword.sh
 WORKDIR /build
 RUN ./install/createDefaultPassword.sh -c -p ${DEFAULT_PW}
-RUN git submodule update --init --recursive
+
 
 ##
 # Build DataExport
 #
 COPY ./dataexport /build/dataexport
+RUN git submodule update --init --recursive
 WORKDIR /build/dataexport/dataexport-core
 RUN --mount=type=cache,target=/root/.m2,sharing=locked \
     mvn dependency:go-offline 
